@@ -36,10 +36,10 @@ public class CurrencyController {
     @PostMapping("/showCurrency")
     public String showCurrency(@ModelAttribute Currency curr, Model model){
         String url = "https://api.apilayer.com/fixer/convert?to=" + curr.getTo() + "&from=" + curr.getFrom() + "&amount=" + curr.getAmount() ;
-    
+        String apiKey = System.getenv("API_KEY");
         //like postman
         RequestEntity<Void> request = RequestEntity.get(url)
-                                        .header("apikey","CbRdL4lueJnOr8C6cEmtyPtNhgmMaPKg")
+                                        .header("apikey", apiKey)
                                         .accept(MediaType.APPLICATION_JSON)
                                         .build();
         ResponseEntity<Converter> response = template.exchange(request, Converter.class);
